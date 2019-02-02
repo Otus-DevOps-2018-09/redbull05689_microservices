@@ -30,10 +30,10 @@ services:
       - backend
       - frontend
     logging:
-    driver: "fluentd"
-    options:
-      fluentd-address: localhost:24224
-      tag: service.post
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: service.post
     environment:
       - ZIPKIN_ENABLED=${ZIPKIN_ENABLED}
   comment:
