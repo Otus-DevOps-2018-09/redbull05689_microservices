@@ -17,10 +17,10 @@ services:
     networks:
       - frontend
     logging:
-    driver: "fluentd"
-    options:
-      fluentd-address: localhost:24224
-      tag: service.ui
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: service.ui
     environment:
       - ZIPKIN_ENABLED=${ZIPKIN_ENABLED}
   post:
