@@ -21,6 +21,8 @@ services:
     options:
       fluentd-address: localhost:24224
       tag: service.ui
+    environment:
+      - ZIPKIN_ENABLED=${ZIPKIN_ENABLED}
   post:
     # build: ./post-py
     image: ${USERNAME}/post:${POSTVERSION}
@@ -50,3 +52,6 @@ networks:
     ipam:
       config:
         - subnet: 192.168.10.0/24
+
+
+
