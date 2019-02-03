@@ -30,3 +30,4 @@ class Metrics
     [@status, @headers, @response]
   end
 end
+
