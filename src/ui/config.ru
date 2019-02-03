@@ -12,3 +12,4 @@ use Prometheus::Middleware::Collector
 use Prometheus::Middleware::Exporter
 
 run Sinatra::Application
+
