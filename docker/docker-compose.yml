@@ -2,6 +2,8 @@ version: '3.3'
 services:
   post_db:
     image: mongo:3.2
+    environment:
+      - ZIPKIN_ENABLED=${ZIPKIN_ENABLED}
     volumes:
       - post_db:/data/db
     networks:
@@ -14,9 +16,10 @@ services:
     # build: ./ui
     image: ${USERNAME}/ui:${UIVERSION}
     ports:
-      - 9292:9292/tcp
+      - ${UIPORT}:${UIPORT}/tcp
     networks:
       - frontend
+      - backend
     logging:
       driver: "fluentd"
       options:
