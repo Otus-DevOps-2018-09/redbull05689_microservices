@@ -23,10 +23,10 @@ services:
       - "9411:9411"
     networks:
       - front_net
-      - back_net
+      - backend
 
 networks:
-  back_net:
-  front_net:
+  backend:
+  frontend:
 
 
