@@ -14,7 +14,7 @@ services:
     # build: ./ui
     image: ${USERNAME}/ui:${UIVERSION}
     ports:
-      - ${UIPORT}:9292/tcp
+      - 9292:9292/tcp
     networks:
       - frontend
     logging:
