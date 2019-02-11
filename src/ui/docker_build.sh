@@ -5,3 +5,5 @@ echo `git rev-parse --abbrev-ref HEAD` >> build_info.txt
 
 docker build -t $USER_NAME/ui .
 
+
+
