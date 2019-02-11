@@ -230,4 +230,3 @@ end
 get '/*' do
   halt 404, 'Page not found'
 end
-
