@@ -2,9 +2,6 @@ version: '3.3'
 services:
   prometheus:
     image: ${USERNAME}/prometheus
-    networks:
-      - backend
-      - frontend
     ports:
       - '9090:9090'
     volumes:
@@ -13,11 +10,14 @@ services:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
       - '--storage.tsdb.retention=1d'
+    networks:
+      - monitoring
+      - front_net
+      - back_net
+
   node-exporter:
     image: prom/node-exporter:v0.15.2
     user: root
-    networks:
-      - backend
     volumes:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
@@ -26,26 +26,11 @@ services:
       - '--path.procfs=/host/proc'
       - '--path.sysfs=/host/sys'
       - '--collector.filesystem.ignored-mount-points="^/(sys|proc|dev|host|etc)($$|/)"'
-  mongo-exporter:
-   image: ${USERNAME}/mongodb_exporter
-   ports:
-     - '9216:9216'
-   networks:
-     - backend
-   environment:
-     - MONGODB_URL=mongodb://post_db:27017
-  blackbox-exporter:
-    image: ${USERNAME}/blackbox_exporter
-    ports:
-      - '9115:9115'
     networks:
-      - backend
-      - frontend
-  cloudprober:
-    image: ${USERNAME}/cloudprober
-    networks:
-      - backend
-      - frontend
+      - monitoring
+      - front_net
+      - back_net
+
   cadvisor:
     image: google/cadvisor:v0.29.0
     volumes:
@@ -56,7 +41,8 @@ services:
     ports:
       - '8080:8080'
     networks:
-      - backend
+      - monitoring
+
   grafana:
     image: grafana/grafana:5.0.0
     volumes:
@@ -69,26 +55,34 @@ services:
     ports:
       - 3000:3000
     networks:
-      - backend
+      - monitoring
+
   alertmanager:
-    image: ${USERNAME}/alertmanager
+    image: ${USER_NAME}/alertmanager
     command:
       - '--config.file=/etc/alertmanager/config.yml'
     ports:
-      - '9093:9093'
+      - 9093:9093
     networks:
-      - backend
+      - monitoring
 
 volumes:
   prometheus_data:
   grafana_data:
 
 networks:
-  backend:
+  monitoring:
     ipam:
+      driver: default
       config:
-        - subnet: 192.168.100.0/24
-  frontend:
+        - subnet: 10.0.3.0/24
+  front_net:
     ipam:
+      driver: default
       config:
-        - subnet: 192.168.10.0/24
+        - subnet: 10.0.1.0/24
+  back_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.0.2.0/24

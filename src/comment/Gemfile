@@ -8,4 +8,3 @@ gem 'prometheus-client'
 gem "rack", '>= 2.0.6'
 gem 'rufus-scheduler'
 gem 'tzinfo-data'
-

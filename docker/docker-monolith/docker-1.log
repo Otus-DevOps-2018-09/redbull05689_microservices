@@ -1,11 +1,14 @@
-REPOSITORY                     TAG                 IMAGE ID            CREATED              SIZE
-redbull05689/ubuntu-tmp-file   latest              feac626f1aed        About a minute ago   116MB
-bitnami/apache                 latest              c29bf4b3eac1        9 days ago           158MB
-ubuntu                         16.04               a51debf7e1eb        11 days ago          116MB
-ubuntu                         latest              93fd78260bd1        11 days ago          86.2MB
-hello-world                    latest              4ab4c602aa5e        2 months ago         1.84kB
+docker images
 
+REPOSITORY                   TAG                 IMAGE ID            CREATED             SIZE
+kbabushkin/ubuntu-tmp-file   latest              47e0df235e56        10 seconds ago      116MB
+ubuntu                       16.04               a51debf7e1eb        2 weeks ago         116MB
+hello-world                  latest              4ab4c602aa5e        3 months ago        1.84kB
 
+Задание со *
 
+docker inspect <u_container_id>
+вывод инфы о контейнере + инфа о образе
 
-
+docker inspect <u_image_id>
+вывод инфы о образе
